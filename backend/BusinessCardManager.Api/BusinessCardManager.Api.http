@@ -1,6 +1,76 @@
 @BusinessCardManager.Api_HostAddress = http://localhost:5222
+@BusinessCardId = 1
 
-GET {{BusinessCardManager.Api_HostAddress}}/weatherforecast/
+### List business cards
+GET {{BusinessCardManager.Api_HostAddress}}/api/BusinessCards
 Accept: application/json
 
-###
+### List business cards with filters
+GET {{BusinessCardManager.Api_HostAddress}}/api/BusinessCards?name=Test&gender=Male&email=test
+Accept: application/json
+
+### Get one business card
+GET {{BusinessCardManager.Api_HostAddress}}/api/BusinessCards/{{BusinessCardId}}
+Accept: application/json
+
+### Create business card
+POST {{BusinessCardManager.Api_HostAddress}}/api/BusinessCards
+Content-Type: application/json
+
+{
+  "name": "Test User",
+  "gender": "Male",
+  "dateOfBirth": "1998-01-15",
+  "email": "test@example.com",
+  "phone": "+962790000000",
+  "photoBase64": null,
+  "address": "Amman, Jordan"
+}
+
+### Delete business card
+DELETE {{BusinessCardManager.Api_HostAddress}}/api/BusinessCards/{{BusinessCardId}}
+
+### Export filtered business cards as CSV
+GET {{BusinessCardManager.Api_HostAddress}}/api/BusinessCards/export/csv?name=Test
+Accept: text/csv
+
+### Export filtered business cards as XML
+GET {{BusinessCardManager.Api_HostAddress}}/api/BusinessCards/export/xml?name=Test
+Accept: application/xml
+
+### Export one business card as CSV
+GET {{BusinessCardManager.Api_HostAddress}}/api/BusinessCards/{{BusinessCardId}}/export/csv
+Accept: text/csv
+
+### Export one business card as XML
+GET {{BusinessCardManager.Api_HostAddress}}/api/BusinessCards/{{BusinessCardId}}/export/xml
+Accept: application/xml
+
+### Import CSV
+# In Visual Studio/VS Code REST Client, attach a local file as multipart form-data.
+POST {{BusinessCardManager.Api_HostAddress}}/api/BusinessCards/import/csv
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="business-cards.csv"
+Content-Type: text/csv
+
+Name,Gender,DateOfBirth,Email,Phone,PhotoBase64,Address
+CSV User,Male,1998-01-15,csv@example.com,+962790000001,,Amman
+--boundary--
+
+### Import XML
+POST {{BusinessCardManager.Api_HostAddress}}/api/BusinessCards/import/xml
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="business-cards.xml"
+Content-Type: application/xml
+
+<BusinessCards><BusinessCard><Name>XML User</Name><Gender>Female</Gender><DateOfBirth>1997-02-20</DateOfBirth><Email>xml@example.com</Email><Phone>+962790000002</Phone><PhotoBase64></PhotoBase64><Address>Irbid</Address></BusinessCard></BusinessCards>
+--boundary--
+
+### Import QR image
+# Use Swagger or Angular for this one because it requires selecting an image file.
+POST {{BusinessCardManager.Api_HostAddress}}/api/BusinessCards/import/qr
+Content-Type: multipart/form-data

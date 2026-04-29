@@ -1,0 +1,33 @@
+<form class="filters" [formGroup]="form">
+  <div class="filter-field filter-search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="11" cy="11" r="7"/>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input type="text" placeholder="Search by name..." formControlName="name" />
+  </div>
+
+  <div class="filter-field">
+    <select formControlName="gender" aria-label="Filter by gender">
+      <option value="">All genders</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+  </div>
+
+  <div class="filter-field">
+    <input type="date" formControlName="dateOfBirth" aria-label="Filter by date of birth" />
+  </div>
+
+  <div class="filter-field">
+    <input type="email" placeholder="Email..." formControlName="email" />
+  </div>
+
+  <div class="filter-field">
+    <input type="tel" placeholder="Phone..." formControlName="phone" />
+  </div>
+
+  @if (hasActiveFilters()) {
+    <button type="button" class="btn-ghost btn-sm" (click)="clear()">Clear all</button>
+  }
+</form>

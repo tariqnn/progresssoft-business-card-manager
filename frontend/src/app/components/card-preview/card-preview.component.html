@@ -1,0 +1,43 @@
+<article class="card-preview" aria-label="Live business card preview">
+  <div class="card-preview-header">
+    <span class="brand-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="14" rx="2"/>
+        <path d="M3 9h18"/>
+        <path d="M7 14h4"/>
+      </svg>
+    </span>
+    <span class="brand-text">Business Card</span>
+  </div>
+
+  <div class="card-preview-body">
+    <div class="avatar">
+      @if (card().photoBase64) {
+        <img [src]="card().photoBase64" alt="Cardholder photo" />
+      } @else {
+        <span>{{ initials() }}</span>
+      }
+    </div>
+    <div class="identity">
+      <h2>{{ card().name || 'Cardholder name' }}</h2>
+      <p class="email">{{ card().email || 'email@example.com' }}</p>
+      <p class="phone">{{ card().phone || '+962 79 000 0000' }}</p>
+    </div>
+  </div>
+
+  <dl class="card-preview-meta">
+    <div>
+      <dt>Gender</dt>
+      <dd>{{ card().gender || '—' }}</dd>
+    </div>
+    <div>
+      <dt>Date of Birth</dt>
+      <dd>{{ card().dateOfBirth || '—' }}</dd>
+    </div>
+  </dl>
+
+  <address class="card-preview-address">
+    <span class="meta-label">Address</span>
+    {{ card().address || 'Address preview appears here' }}
+  </address>
+</article>

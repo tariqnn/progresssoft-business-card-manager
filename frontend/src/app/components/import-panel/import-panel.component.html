@@ -1,0 +1,66 @@
+<div class="import-panel">
+  <header class="panel-header">
+    <div>
+      <h2>Import Cards</h2>
+      <p>Drop a CSV, XML, or QR image. Preview before importing.</p>
+    </div>
+  </header>
+
+  <div class="mode-tabs" role="tablist">
+    @for (option of [
+      { id: 'csv', label: 'CSV', hint: 'Header row + rows' },
+      { id: 'xml', label: 'XML', hint: 'BusinessCard elements' },
+      { id: 'qr', label: 'QR', hint: 'Image with payload' }
+    ]; track option.id) {
+      <button type="button" class="mode-tab" role="tab"
+              [class.active]="mode() === option.id"
+              [attr.aria-selected]="mode() === option.id"
+              (click)="setMode($any(option.id))">
+        <span class="mode-label">{{ option.label }}</span>
+        <span class="mode-hint">{{ option.hint }}</span>
+      </button>
+    }
+  </div>
+
+  <label class="dropzone" appDragDrop (fileDropped)="onFileDropped($event)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="17 8 12 3 7 8"/>
+      <line x1="12" y1="3" x2="12" y2="15"/>
+    </svg>
+    <span class="dropzone-title">Drop file here, or click to browse</span>
+    <span class="dropzone-hint">{{ mode() === 'qr' ? 'PNG, JPG, BMP, GIF, WEBP' : (mode() | uppercase) + ' file up to 5MB' }}</span>
+    <input type="file" [accept]="acceptAttribute()" (change)="onFileSelected($event)" hidden />
+  </label>
+
+  @if (preview(); as p) {
+    <section class="preview-section">
+      <header class="preview-header">
+        <div>
+          <h3>{{ p.cards.length }} card{{ p.cards.length === 1 ? '' : 's' }} ready</h3>
+          <p>From <strong>{{ p.file.name }}</strong></p>
+        </div>
+        <div class="preview-actions">
+          <button type="button" class="btn-ghost" (click)="cancelPreview()">Cancel</button>
+          <button type="button" class="btn-primary" (click)="confirmImport()" [disabled]="isImporting()">
+            @if (isImporting()) {
+              <span class="spinner"></span> Importing...
+            } @else {
+              Import {{ p.cards.length }} card{{ p.cards.length === 1 ? '' : 's' }}
+            }
+          </button>
+        </div>
+      </header>
+
+      <div class="preview-grid">
+        @for (card of p.cards; track trackByIndex($index, card)) {
+          <article class="preview-item">
+            <strong>{{ card.name || 'Unnamed card' }}</strong>
+            <span>{{ card.email || 'No email' }}</span>
+            <span>{{ card.phone || 'No phone' }}</span>
+          </article>
+        }
+      </div>
+    </section>
+  }
+</div>

@@ -1,0 +1,46 @@
+.filters {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr 1fr auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.filter-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.filter-field input,
+.filter-field select {
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 12px;
+  font-size: 13px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.filter-search input {
+  padding-left: 36px;
+}
+
+.filter-search svg {
+  position: absolute;
+  left: 12px;
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .filters {
+    grid-template-columns: 1fr 1fr;
+  }
+  .filter-search { grid-column: 1 / -1; }
+}
+
+@media (max-width: 480px) {
+  .filters { grid-template-columns: 1fr; }
+}

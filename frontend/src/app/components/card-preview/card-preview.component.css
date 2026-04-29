@@ -1,0 +1,135 @@
+.card-preview {
+  position: relative;
+  display: grid;
+  gap: 22px;
+  padding: 28px;
+  border-radius: var(--radius-lg);
+  color: #f8fafc;
+  background:
+    radial-gradient(1200px 400px at -10% -20%, rgba(139, 92, 246, 0.55), transparent 60%),
+    radial-gradient(900px 300px at 110% 110%, rgba(6, 182, 212, 0.45), transparent 60%),
+    linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 25px 50px -12px rgba(76, 29, 149, 0.45),
+    0 8px 20px rgba(15, 23, 42, 0.18);
+  overflow: hidden;
+}
+
+.card-preview::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><circle cx='100' cy='100' r='80' stroke='white' stroke-opacity='0.04' stroke-width='1' fill='none'/></svg>");
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.card-preview > * { position: relative; }
+
+.card-preview-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(248, 250, 252, 0.78);
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.brand-mark svg { width: 16px; height: 16px; }
+
+.card-preview-body {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  flex: 0 0 76px;
+  width: 76px;
+  height: 76px;
+  border-radius: 18px;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.identity { min-width: 0; }
+
+.identity h2 {
+  margin: 0 0 6px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.identity p {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(248, 250, 252, 0.82);
+  line-height: 1.5;
+}
+
+.identity .email { font-weight: 500; }
+
+.card-preview-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 0;
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-preview-meta dt,
+.meta-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(248, 250, 252, 0.6);
+  margin: 0 0 4px;
+}
+
+.card-preview-meta dd {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.card-preview-address {
+  font-style: normal;
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(248, 250, 252, 0.85);
+}
+
+.card-preview-address .meta-label {
+  display: block;
+}
