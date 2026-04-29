@@ -81,6 +81,14 @@ Regenerate the SQL script:
 dotnet ef migrations script --project ".\backend\BusinessCardManager.Api" --output ".\database\schema.sql"
 ```
 
+For evaluator testing without running migrations, execute the database dump in SQL Server Management Studio:
+
+```text
+database/BusinessCardManagerDb_dump.sql
+```
+
+This script creates `BusinessCardManagerDb`, creates the required tables, records the EF migration, and inserts sample business cards.
+
 ## Run Backend
 
 From the repository root:
@@ -232,10 +240,16 @@ GET /api/BusinessCards/1/export/xml
 
 ## Database Script
 
-The database script for testing is available at:
+The EF migration schema script is available at:
 
 ```text
 database/schema.sql
+```
+
+The SQL Server dump for testing with sample data is available at:
+
+```text
+database/BusinessCardManagerDb_dump.sql
 ```
 
 ## Notes
